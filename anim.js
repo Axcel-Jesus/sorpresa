@@ -38,8 +38,8 @@ var lyricsData = [
   { text: "Yo ya decidí...", time: 193.6 },
   { text: "y tuuu?..", time: 198.5, duration: 3.5 },
   { text: "♫♫...♪ ♪ ♪ ♫ ", time: 200.2 },
-  { text: "♪ ♪ ♪ ♪ ♪ ♪", time: 203.8, duration: 5 },
-  { text: "Cuando encontre esta canción hace varios años, no creí que llegaria el dia en que se lo dedicara a alguien, pero cuando lo volvi a escuchar gracias a youtube, transmitia exactamente mi sentir, y asi es como ahora te la dedico a vos ❤❤❤", time: 226, duration: 120},
+  { text: "♪ ♪ ♪ ♪ ♪ ♪", time: 203.8, duration: 3 },
+  { text: "Cuando encontre esta canción hace varios años, no creí que llegaria el dia en que se lo dedicara a alguien, pero cuando lo volvi a escuchar gracias a youtube, transmitia exactamente mi sentir, y asi es como ahora te la dedico a vos ❤❤❤", time: 207, duration: 120},
 ];
 
 // Animar las letras
