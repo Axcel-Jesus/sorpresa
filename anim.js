@@ -4,58 +4,72 @@ var lyrics = document.querySelector("#lyrics");
 
 // Array de objetos que contiene cada línea y su tiempo de aparición en segundos
 var lyricsData = [
-  { text: "At the time", time: 15 },
-  { text: "The whisper of birds", time: 18 },
-  { text: "Lonely before the sun cried", time: 27 },
-  { text: "Fell from the sky", time: 32 },
-  { text: "Like water drops", time: 33 },
-  { text: "Where I'm now? I don't know why", time: 41 },
-  { text: "Nice butterflies in my hands", time: 47 },
-  { text: "Too much light for twilight", time: 54 },
-  { text: "In the mood for the flowers love", time: 59 },
-  { text: "That vision", time: 67 },
-  { text: "Really strong, blew my mind", time: 72 },
-  { text: "Silence Let me see what it was", time: 78 },
-  { text: "I only want to live in clouds", time: 83 },
-  { text: "Where I'm now? I don't know why", time: 91 },
-  { text: "Nice butterflies in my hands", time: 97 },
-  { text: "Too much light for twilight", time: 104 },
-  { text: "In the mood for the flowers love", time: 108 },
-  { text: "At the time", time: 144 },
-  { text: "The whisper of birds", time: 148 },
-  { text: "Lonely before the sun cried", time: 153 },
-  { text: "Fell from the sky", time: 158 },
-  { text: "Like water drops", time: 164 },
-  { text: "Where I'm now? I don't know why", time: 169 },
-  { text: "Nice butterflies in my hands", time: 176 },
-  { text: "Too much light for twilight", time: 183 },
-  { text: "In the mood for the flowers", time: 188 },
-  { text: "Love.", time: 140 },
+  { text: "Eres lo primero en lo que pienso en las mañanas", time: 37 },
+  { text: "eres con quien quiero", time: 41 },
+  { text: "despertar entre las sabanas", time: 43 },
+  { text: "eres mi deseo de 11:11", time: 46 },
+  { text: "eres con quien quiero estar...", time: 50.5 },
+  { text: "FEBRERO CATORCE", time: 52.7 },
+  { text: "Tuuuuuuuuuuuuuuuuuuu❤❤❤❤❤", time: 55, duration: 7 },
+  { text: "tuuuuuuuuuuuu....❤", time: 64, duration: 6 },
+  { text: "Lo intentamos... si tu quieres", time: 73 },
+  { text: "puedo ser yo si te conviene", time: 77, duration: 5 },
+  { text: "Yo ya decidí...", time: 83 },
+  { text: "¿y tu?", time: 87.3, duration: 3 },
+  { text: "Lo intentamos si tu quieres", time: 91.5 },
+  { text: "puedo ser yoo... si te conviene", time: 96, duration: 4 },
+  { text: "Yo ya decidí...", time: 101.5 },
+  { text: "y tu?..", time: 105.5, duration: 3.5 },
+  { text: "♫♫...♪♪♪♫♫♪♪♪", time: 110.2 },
+  { text: "♫♫♫.....♪♪♫♫♫", time: 120.8 },
+  { text: "Eres... mis canciones preferidas", time: 129 },
+  { text: "tienes que ser tu... solo tu", time: 134 },
+  { text: "Eres lo mejor que podría..", time: 138 },
+  { text: "pasarle a mi vida", time: 143 },
+  { text: "perfecta melodía...", time: 145 },
+  { text: "TUUUUUUUU....❤❤❤", time: 147.5, duration: 4},
+  { text: "Tuuuuuuuuuu...", time: 157, duration: 5 },
+  { text: "Lo intentamos... si tu quieres", time: 165.5 },
+  { text: "puedo ser yo, si te conviene", time: 169.4 },
+  { text: "yo ya decidí...", time: 175 },
+  { text: "Y tu¿?", time: 179.3, duration: 3 },
+  { text: "Lo intentamos si tu quieres", time: 183.5 },
+  { text: "puedo ser yoo... si te conviene", time: 188, duration: 4 },
+  { text: "Yo ya decidí...", time: 193.6 },
+  { text: "y tuuu?..", time: 198.5, duration: 3.5 },
+  { text: "♫♫...♪ ♪ ♪ ♫ ", time: 200.2 },
+  { text: "♪ ♪ ♪ ♪ ♪ ♪", time: 203.8, duration: 5 },
+  { text: "Cuando encontre esta canción hace varios años, no creí que llegaria el dia en que se lo dedicara a alguien", time: 226 },
 ];
 
 // Animar las letras
 function updateLyrics() {
-  var time = Math.floor(audio.currentTime);
-  var currentLine = lyricsData.find(
-    (line) => time >= line.time && time < line.time + 6
-  );
+  var time = audio.currentTime;
 
-  if (currentLine) {
-    // Calcula la opacidad basada en el tiempo en la línea actual
-    var fadeInDuration = 0.1; // Duración del efecto de aparición en segundos
-    var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
+  for (let i = 0; i < lyricsData.length; i++) {
+    let current = lyricsData[i];
+    let next = lyricsData[i + 1];
 
-    // Aplica el efecto de aparición
-    lyrics.style.opacity = opacity;
-    lyrics.innerHTML = currentLine.text;
-  } else {
-    // Restablece la opacidad y el contenido si no hay una línea actual
-    lyrics.style.opacity = 0;
-    lyrics.innerHTML = "";
+    if (time >= current.time) {
+      let endTime = current.duration
+        ? current.time + current.duration
+        : (next ? next.time : audio.duration);
+
+      if (time < endTime) {
+        lyrics.innerHTML = current.text;
+        lyrics.style.opacity = 1;
+        return;
+      }
+    }
   }
+
+  lyrics.style.opacity = 0;
+  lyrics.innerHTML = "";
 }
 
-setInterval(updateLyrics, 1000);
+
+audio.addEventListener("timeupdate", updateLyrics);
+
 
 //funcion titulo
 // Función para ocultar el título después de 216 segundos
